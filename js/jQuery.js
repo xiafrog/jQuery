@@ -143,13 +143,11 @@
     var
         version = "3.4.1",
 
-        // 定义jQuery对象为一个函数，两个参数：选择器和内容
+        // 定义jQuery对象为一个函数，两个参数：选择器和上下文
         // 这里直接使用匿名函数赋值，无new构造
         jQuery = function( selector, context ) {
 
             // 调用jQuery函数后，会返回以jQuery.fn.init为构造函数的对象
-            // 由后面init.prototype = jQuery.fn可得，调用jQuery函数，返回的仍然是一个jQuery对象
-            // 因此可以进行链式操作
             return new jQuery.fn.init( selector, context );
         },
 
@@ -2947,7 +2945,7 @@
 
         // 定义jQuery.fn.init的函数
         // 调用jQuery函数后，会返回以此为构造函数的对象
-        // 由后面的init.prototype = jQuery.fn可得，init构造的对象即为jQuery对象
+        // 由后面的init.prototype = jQuery.fn可得，init类型和jQuery类型的对象有共同的原型jQuery.fn
         init = jQuery.fn.init = function( selector, context, root ) {
             var match, elem;
 
@@ -3048,9 +3046,8 @@
             return jQuery.makeArray( selector, this );
         };
 
-// Give the init function the jQuery prototype for later instantiation
     // init类型的实例对象，其原型为jQury.fn
-    // 由前面jQuery.fn = jQuery.prototype可得，init类型的对象即为jQuery类型的对象
+    // 由前面jQuery.fn = jQuery.prototype可得，init类型和jQuery类型的对象有共同的原型jQuery.fn
     init.prototype = jQuery.fn;
 
 // Initialize central reference
